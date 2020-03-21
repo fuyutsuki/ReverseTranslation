@@ -1,0 +1,8 @@
+name: ReverseTranslation
+prefix: ReverseTranslation
+main: jp\mcbe\ReverseTranslation\Main
+version: 1.14.30 # Minecraft client version
+api: 3.11.0 # pmmp/ocketMine-MP
+author: yuko_fuyutsuki
+description: "Reverse translation {Block, Item}Name to Minecraft NamespacedID"
+website: https://github.com/fuyutsuki/ReverseTranslation
