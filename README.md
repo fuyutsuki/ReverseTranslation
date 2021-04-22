@@ -22,7 +22,7 @@ depends:
 
 ### as virion
 
-virion.yml
+poggit.yml
 ```yaml
 # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/author/YourProject
 branches:
