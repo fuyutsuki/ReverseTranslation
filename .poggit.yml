@@ -1,0 +1,12 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/fuyutsuki/ReverseTranslation
+build-by-default: true
+branches:
+- master
+projects:
+  ReverseTranslation:
+    path: ""
+    icon: ""
+    libs:
+      - src: fuyutsuki/libdesign-pattern/libdesign-pattern
+        version: 0.2.0
+...
