@@ -12,20 +12,10 @@ use pocketmine\plugin\PluginBase;
  */
 class Main extends PluginBase {
 
-    /** @var ReverseTranslator */
-    private $reverseTranslator;
-
-    public function getReverseTranslator(): ReverseTranslator {
-        return $this->reverseTranslator;
-    }
-
     public function onLoad() {
-        $description = $this->getDescription();
-        $api = (string)$description->getCompatibleApis()[0];
-        $version = (string)$description->getVersion();
-        $file = "{$api}_v{$version}.json";
-        $this->saveResource($file);
-        $this->reverseTranslator = new ReverseTranslator("{$this->getDataFolder()}{$file}");
+        $resource = $this->getResource(ReverseTranslator::FILE_NAME);
+        $meta = stream_get_meta_data($resource);
+        new ReverseTranslator($meta["uri"]);
     }
 
 }

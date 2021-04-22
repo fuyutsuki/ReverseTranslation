@@ -5,8 +5,9 @@ branches:
 projects:
   ReverseTranslation:
     path: ""
-    icon: ""
-    libs:
-      - src: fuyutsuki/libdesign-pattern/libdesign-pattern
-        version: 0.2.0
+    icon: "/icon.png"
+  libReverseTranslation:
+    path: ""
+    type: library
+    model: virion
 ...

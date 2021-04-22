@@ -1,0 +1,6 @@
+name: libReverseTranslation
+antigen: jp\mcbe\ReverseTranslation
+api: 3.12.0
+version: 1.14.30
+author: yuko fuyutsuki
+description: Reverse translation {Block, Item}Name to Minecraft NamespacedID

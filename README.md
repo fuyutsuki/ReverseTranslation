@@ -6,11 +6,13 @@ S: {Item, Block}Name ==[ReverseTranslation]==> NamespacedID ==[TranslationContai
 
 C: TextPacket ==[Client side i18n]==> Client locale {Item, Block}Name
 
-## resources\{API}_v{MinecraftVersion}.json
+## resources/{API}_v{MinecraftVersion}.json
 
-auto generated...
+auto generated.
 
-## API usage
+## Usage
+
+### as plugin
 
 plugin.yml
 ```yaml
@@ -18,31 +20,54 @@ depends:
  - ReverseTranslation # fuyutsuki/ReverseTranslation
 ```
 
-ExamplePlugin.php
+### as virion
+
+virion.yml
+```yaml
+# Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/author/YourProject
+branches:
+  - master
+projects:
+  YourProject:
+    path: ""
+    icon: ""
+    libs:
+      - src: fuyutsuki/ReverseTranslation/libReverseTranslation
+        version: 1.14.30
+```
+
+### API
+
+src/example/ExamplePlugin/Main.php
+
 ```php
 <?php
 
 declare(strict_types=1);
 
+namespace example\ExamplePlugin;
+
+use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
-use pocketmine\lang\TranslationContainer;
 use jp\mcbe\ReverseTranslation\ReverseTranslator;
 
-class ExamplePlugin extends PluginBase implements Listener{
+class Main extends PluginBase implements Listener {
 
     /** @var ReverseTranslator */
     private $rt;
     
     public function onEnable() {
-        $plugin = $this->getServer()->getPluginManager()->getPlugin("ReverseTranslation");
-        $this->rt = $plugin->getReverseTranslator();
+        $this->rt = ReverseTranslator::getInstance();
     }
 
     public function onBreakBlock(BlockBreakEvent $ev) {
         $block = $ev->getBlock();
         $player = $ev->getPlayer();
-        $player->sendMessage(new TranslationContainer("Translated: " . $this->rt->getByBlock($block)));
-        // If you want to display the message along with the block name, combine the messages in TranslationContainer
+        $item = $player->getInventory()->getItemInHand();
+        
+        $player->sendTranslation("What you have: {$this->rt->fromItem($item)}");
+        $player->sendTranslation("What you broke: {$this->rt->fromBlock($block)}");
     }
 
 }
