@@ -12,7 +12,7 @@ use pocketmine\plugin\PluginBase;
  */
 class Main extends PluginBase {
 
-    public function onLoad() {
+    protected function onLoad(): void {
         $resource = $this->getResource(ReverseTranslator::FILE_NAME);
         $meta = stream_get_meta_data($resource);
         new ReverseTranslator($meta["uri"]);
